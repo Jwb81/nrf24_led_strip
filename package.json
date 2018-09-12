@@ -1,0 +1,24 @@
+{
+  "name": "nrf24_led_strip",
+  "version": "1.0.0",
+  "description": "Control an RGB LED strip by sending commands from a raspberry pi to an Arduino Uno using an nrf24 transceiver",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jwb81/nrf24_led_strip.git"
+  },
+  "author": "Jason Barnett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jwb81/nrf24_led_strip/issues"
+  },
+  "homepage": "https://github.com/Jwb81/nrf24_led_strip#readme"
+}
