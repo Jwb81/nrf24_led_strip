@@ -17,6 +17,39 @@ var nrf24 = require('nrf24');
 
 */
 
+// Radio pipe addresses for the 2 nodes to communicate.
+const pipes = [ "0xABCDABCD71LL", "0x544d52687CLL" ];              
+
+var rf24 = new nrf24.RF24(15, 24);
+rf24.begin();
+
+// configure the radio
+rf24.config({
+    PALevel: nrf24.RF24_PA_LOW,
+    DataRate: nrf24.RF24_1MBPS
+});
+
+// register reading pipes
+var pip = rf24.addReadPipe(pipes[0], true);   // 'true' sets autoAck to yes
+
+rf24.read( function(data, pipe) {
+    console.log("data: " + data + "\npipe: " + pipe + "\n");
+}, function(isStopped, by_user, error_count) {
+    // runs if the listening process is stoppped
+
+    console.log(isStopped);
+    console.log(by_user);
+    console.log(error_count);
+})
+
+
+
+// sending data over the radio
+var counter = 0;
+var data = Buffer.from(counter);
+rf24.useWritePipe(pipes[1]);
+rf24.write(data);
+
 
 
 
@@ -49,15 +82,6 @@ var server = http.listen(1000, () => {
 
 // catch ctrl+c event
 process.on('SIGINT', function () {
-
-    // turn off the RGB LED
-    if (system == 2) {
-        ledRed.digitalWrite(1); // Turn RED LED off
-        ledGreen.digitalWrite(1); // Turn GREEN LED off
-        ledBlue.digitalWrite(1); // Turn BLUE LED off
-
-
-    }
 
     // exit completely
     process.exit(0);
