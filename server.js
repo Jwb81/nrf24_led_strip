@@ -20,7 +20,7 @@ var nrf24 = require('nrf24');
 // Radio pipe addresses for the 2 nodes to communicate.
 const pipes = [ "0xABCDABCD71LL", "0x544d52687CLL" ];              
 
-var rf24 = new nrf24.RF24(15, 24);
+var rf24 = new nrf24.RF24(5, 0);
 rf24.begin();
 
 // configure the radio
